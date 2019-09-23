@@ -20,7 +20,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::with('user:id,name')->get();
+        $posts = Post::with('user:id,name')->paginate(6);
 
         if ($posts)
             return response()->json($posts, 200);

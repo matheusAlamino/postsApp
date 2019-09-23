@@ -19,10 +19,10 @@ class NotificationController extends Controller
     {
         $notifications = Notification::where('id_usuario', $this->userId);
         if ($notifications->exists()) {
-            foreach ($notifications->get() as $notification) {
+            foreach ($notifications->paginate(6) as $notification) {
                 $this->authorize('read', $notification);
             }
-            return response()->json($notifications->get(), 200);
+            return response()->json($notifications->paginate(6), 200);
         }
     }
 
