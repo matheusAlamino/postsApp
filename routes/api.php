@@ -14,6 +14,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
     Route::get('/', 'UserController@index');
     Route::get('/{id}', 'UserController@show');
     Route::put('/{id}', 'UserController@update');
+    Route::put('/{id}/Notifications', 'UserController@updateNotifications');
     Route::delete('/{id}', 'UserController@delete');
 
     Route::get('/auth/me', 'UserController@me');

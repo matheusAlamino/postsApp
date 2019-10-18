@@ -9,6 +9,7 @@ use Faker\Generator as Faker;
 $factory->define(Notification::class, function (Faker $faker) {
     return [
         'text' => $faker->text(200),
-        'id_usuario' => factory(User::class)->create()->id
+        'id_usuario' => factory(User::class)->create()->id,
+        'seen' => $faker->boolean(45)
     ];
 });

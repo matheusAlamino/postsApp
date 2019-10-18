@@ -17,6 +17,7 @@ class CreateNotificationTable extends Migration
             $table->bigIncrements('id');
             $table->string('text');
             $table->bigInteger('id_usuario')->unsigned();
+            $table->boolean('seen')->default(false);
 
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
@@ -30,6 +31,6 @@ class CreateNotificationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('notifications');
     }
 }

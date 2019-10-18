@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Notification;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -73,6 +74,26 @@ class UserController extends Controller
         }
 
         return response()->json(['message' => 'Operação não autorizada'], 400);
+    }
+
+    public function updateNotifications($id)
+    {
+        try {
+            $notifications = Notification::where('id_usuario', $id)->where('seen', '0');
+            if ($notifications->exists()) {
+                foreach ($notifications->get() as $notification) {
+                    $notification->update([
+                        'seen' => true
+                    ]);
+                }
+
+                $notification->save();
+
+                return response()->json(['message' => 'saved!']);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Ocorreu um erro processando a solicitação'], 500);;
+        }
     }
 
     public function me()

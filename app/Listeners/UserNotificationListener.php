@@ -32,9 +32,12 @@ class UserNotificationListener
 
         $post = Post::find($comment->id_post);
 
-        Notification::create([
-            'id_usuario' => $post->id_usuario,
-            'text' => 'Existe um novo comentario na postagem ' . $post->id
-        ]);
+        if ($post->id_usuario != $comment->id_usuario) {
+            Notification::create([
+                'id_usuario' => $post->id_usuario,
+                'text' => 'Existe um novo comentario na postagem ' . $post->id,
+                'seen' => false
+            ]);
+        }
     }
 }
