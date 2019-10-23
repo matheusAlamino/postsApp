@@ -32,6 +32,11 @@ class NotificationController extends Controller
                 'countNotSeen' => $countNotSeen
             ], 200);
         }
+
+        return response()->json([
+            'message' => 'Não possui notifcações',
+            'countNotSeen' => 0
+        ]);
     }
 
     public function show($id)
