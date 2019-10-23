@@ -43,19 +43,6 @@ class NotificationController extends Controller
         return response()->json($notification);
     }
 
-    public function update($id)
-    {
-        $notification = Notification::find($id);
-
-        $notification->update([
-            'seen' => true
-        ]);
-
-        $notification->save();
-
-        return response()->json(['message' => 'saved!']);
-    }
-
     public function delete($id)
     {
         $notification = Notification::find($id);
