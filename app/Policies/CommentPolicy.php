@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Comment;
+use App\Post;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -20,8 +21,8 @@ class CommentPolicy
         //
     }
 
-    public function edit(User $user, Comment $comment)
+    public function edit(User $user, Comment $comment, Post $post)
     {
-        return $user->id === $comment->id_usuario;
+        return $user->id === $comment->id_usuario || $user->id === $post->id_usuario;
     }
 }

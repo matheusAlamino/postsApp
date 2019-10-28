@@ -141,7 +141,7 @@ class CommentTest extends TestCase
     }
 
     /** @test */
-    public function delete_comment_wrong_user()
+    public function delete_comment_wrong_comment()
     {
         $this->popula();
 

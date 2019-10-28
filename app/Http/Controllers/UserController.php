@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Notification;
+use App\Post;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -94,6 +95,16 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ocorreu um erro processando a solicitação'], 500);;
         }
+    }
+
+    public function myPosts($id)
+    {
+        $posts = Post::with('user:id,name')->where('id_usuario', $id)->latest()->paginate(6);
+
+        if ($posts)
+            return response()->json($posts, 200);
+
+        return response()->json(['message' => 'Você não possui posts'], 400);
     }
 
     public function me()

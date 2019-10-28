@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Http\Requests\CommentRequest;
+use App\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -40,8 +41,9 @@ class CommentController extends Controller
     public function delete($id)
     {
         $comment = Comment::find($id);
+        $post = Post::find($comment->id_post);
 
-        $this->authorize('edit', $comment);
+        $this->authorize('edit', [$comment, $post]);
 
         $comment->destroy($id);
 
