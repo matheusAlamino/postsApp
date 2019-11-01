@@ -31,10 +31,14 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::with('comments')->find($id);
+        $totalComments = 0;
 
         if ($post) {
-
-            return response()->json($post);
+            $totalComments = $post->comments->count();
+            return response()->json([
+                'data' => $post,
+                'totalComments' => $totalComments
+            ]);
         }
 
         return response()->json(['message' => 'Post não existe'], 400);

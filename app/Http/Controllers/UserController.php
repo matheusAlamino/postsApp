@@ -99,7 +99,7 @@ class UserController extends Controller
 
     public function myPosts($id)
     {
-        $posts = Post::with('user:id,name')->where('id_usuario', $id)->latest()->paginate(6);
+        $posts = Post::with('user:id,name')->where('id_usuario', $id)->latest()->paginate(3);
 
         if ($posts)
             return response()->json($posts, 200);
